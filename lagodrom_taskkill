@@ -1,0 +1,17 @@
+import os
+import subprocess
+import time
+
+def kill_process(process_name):
+    try:
+        subprocess.call(['taskkill', '/IM', process_name])
+        print(f'Процесс {process_name} успешно завершен.')
+    except Exception as e:
+        print(f'Ошибка при завершении процесса {process_name}: {str(e)}')
+
+if __name__ == '__main__':
+    process_name = 'CKeyboard.exe'
+
+    while True:
+        kill_process(process_name)
+        time.sleep(0.1)
