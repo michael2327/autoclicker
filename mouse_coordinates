@@ -1,0 +1,15 @@
+import pyautogui
+from tkinter import *
+
+def get_mouse_coordinates():
+    x, y = pyautogui.position()
+    coordinates_label.configure(text=f"X: {x}  Y: {y}")
+    coordinates_label.after(10, get_mouse_coordinates)
+
+root = Tk()
+root.title("Мыш кродеться")
+coordinates_label = Label(root, font=("Arial", 20))
+coordinates_label.pack()
+
+get_mouse_coordinates()
+root.mainloop()
