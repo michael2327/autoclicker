@@ -1,0 +1,52 @@
+import pyautogui
+import time
+import psutil
+import keyboard
+import pygetwindow
+import ctypes
+
+time.sleep(1)
+while True:
+    if "ASystemTouchN.exe" not in (p.name() for p in psutil.process_iter()):
+
+        current_window = pygetwindow.getActiveWindow()
+        current_layout = current_window.title
+
+        user32 = ctypes.WinDLL("user32.dll")
+        foreground_window = user32.GetForegroundWindow()
+        foreground_thread_id = user32.GetWindowThreadProcessId(foreground_window, None)
+        keyboard_layout = user32.GetKeyboardLayout(foreground_thread_id) & 0xFFFF
+
+        if keyboard_layout != 0x0409:  # 0x0409 - код для английской раскладки
+            keyboard.press_and_release('alt + shift')
+
+        time.sleep(0.5)
+        pyautogui.hotkey('win', 'd')
+        time.sleep(0.4)
+
+        for _ in range(5):
+            pyautogui.moveTo(949, 93)
+            time.sleep(0.1)
+            pyautogui.click(clicks=2)
+            pyautogui.moveTo(1104, 249)
+            time.sleep(0.1)
+            pyautogui.click(clicks=2)
+
+        for _ in range(15):
+            time.sleep(0.01)
+            pyautogui.moveTo(1025, 31)
+        pyautogui.click(clicks=2)
+
+        for _ in range(5):
+            pyautogui.moveTo(1013, 553)
+            pyautogui.click(clicks=2)
+            time.sleep(0.1)
+
+        time.sleep(7)
+
+        for _ in range(5):
+            pyautogui.moveTo(830, 525)
+            pyautogui.click(clicks=2)
+            time.sleep(0.1)
+
+        time.sleep(0.2)
